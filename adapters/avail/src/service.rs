@@ -36,8 +36,8 @@ pub struct DaServiceConfig {
     pub app_id: u32,
 }
 
-const DEFAULT_POLLING_TIMEOUT: Duration = Duration::from_secs(60);
-const DEFAULT_POLLING_INTERVAL: Duration = Duration::from_secs(1);
+pub const DEFAULT_POLLING_TIMEOUT: Duration = Duration::from_secs(60);
+pub const DEFAULT_POLLING_INTERVAL: Duration = Duration::from_secs(1);
 
 #[derive(Clone)]
 pub struct DaProvider {

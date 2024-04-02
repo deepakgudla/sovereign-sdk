@@ -6,6 +6,7 @@ use std::str::FromStr;
 
 use const_rollup_config::{ROLLUP_BATCH_NAMESPACE_RAW, ROLLUP_PROOF_NAMESPACE_RAW};
 use sov_celestia_adapter::types::Namespace;
+use sov_avail_adapter::service::{DaProvider, DaServiceConfig};
 mod mock_rollup;
 pub use mock_rollup::*;
 use tracing_subscriber::layer::SubscriberExt;
@@ -16,6 +17,9 @@ mod celestia_rollup;
 pub use celestia_rollup::*;
 #[cfg(feature = "experimental")]
 mod eth;
+
+mod avail_rollup;
+pub use avail_rollup::*;
 
 /// The rollup stores its data in the namespace b"sov-test" on Celestia
 /// You can change this constant to point your rollup at a different namespace

@@ -1,7 +1,7 @@
 use anyhow::Context as _;
 use clap::Parser;
 use demo_stf::genesis_config::GenesisPaths;
-use sov_demo_rollup::{initialize_logging, CelestiaDemoRollup, MockDemoRollup};
+use sov_demo_rollup::{initialize_logging, CelestiaDemoRollup, MockDemoRollup, AvailDemoRollup};
 use sov_mock_da::MockDaConfig;
 use sov_modules_rollup_blueprint::{Rollup, RollupBlueprint};
 use sov_modules_stf_blueprint::kernels::basic::{
