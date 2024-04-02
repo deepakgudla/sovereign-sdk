@@ -6,7 +6,7 @@ use std::str::FromStr;
 
 use const_rollup_config::{ROLLUP_BATCH_NAMESPACE_RAW, ROLLUP_PROOF_NAMESPACE_RAW};
 use sov_celestia_adapter::types::Namespace;
-use sov_avail_adapter::service::{DaProvider, DaServiceConfig};
+use sov_avail_adapter::service::*;
 mod mock_rollup;
 pub use mock_rollup::*;
 use tracing_subscriber::layer::SubscriberExt;

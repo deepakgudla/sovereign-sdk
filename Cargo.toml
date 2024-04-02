@@ -5,6 +5,7 @@ members = [
     "adapters/avail",
     "adapters/risc0",
     "adapters/celestia",
+    "adapters/avail",
     "adapters/mock-da",
     "adapters/mock-zkvm",
     # Examples

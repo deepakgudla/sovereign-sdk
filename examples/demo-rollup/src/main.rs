@@ -2,6 +2,7 @@ use anyhow::Context as _;
 use clap::Parser;
 use demo_stf::genesis_config::GenesisPaths;
 use sov_demo_rollup::{initialize_logging, CelestiaDemoRollup, MockDemoRollup, AvailDemoRollup};
+
 use sov_mock_da::MockDaConfig;
 use sov_modules_rollup_blueprint::{Rollup, RollupBlueprint};
 use sov_modules_stf_blueprint::kernels::basic::{
@@ -32,6 +33,7 @@ struct Args {
 #[derive(clap::ValueEnum, Clone, Debug)]
 enum SupportedDaLayer {
     Celestia,
+    AvailDa,
     Mock,
 }
 
@@ -64,6 +66,18 @@ async fn main() -> Result<(), anyhow::Error> {
                 rollup_config_path,
                 RollupProverConfig::Execute,
             )
+            .await?;
+            rollup.run().await
+        }
+        SupportedDaLayer::AvailDa => {
+            let rollup =  new_rollup_with_avail_da(
+                &GenesisPaths::from_dir("../test-data/genesis/demo-tests/avail"),
+                &BasicKernelGenesisPaths {
+                    chain_state: "../test-data/genesis/demo-tests/avail/chain_state.json".into(),
+                },
+                rollup_config_path,
+                RollupProverConfig::Execute,
+            ) 
             .await?;
             rollup.run().await
         }
@@ -121,6 +135,38 @@ async fn new_rollup_with_mock_da(
     };
 
     let mock_rollup = MockDemoRollup {};
+    mock_rollup
+        .create_new_rollup(
+            rt_genesis_paths,
+            kernel_genesis,
+            rollup_config,
+            prover_config,
+        )
+        .await
+}
+
+async fn new_rollup_with_avail_da(
+    rt_genesis_paths: &GenesisPaths,
+    kernel_genesis_paths: &BasicKernelGenesisPaths,
+    rollup_config_path: &str,
+    prover_config: RollupProverConfig,
+) -> Result<Rollup<AvailDemoRollup>, anyhow::Error> {
+    debug!(
+        "starting avail rollup with config {}",
+        rollup_config_path
+    );
+
+    let rollup_config: RollupConfig<sov_avail_adapter::DaServiceConfig> =
+    from_toml_path(rollup_config_path).context("Failed to read rollup configuration")?;
+
+    let kernel_genesis = BasicKernelGenesisConfig {
+        chain_state: serde_json::from_str(
+            &std::fs::read_to_string(&kernel_genesis_paths.chain_state)
+                .context("Failed to read chain state")?,
+        )?,
+    };
+
+    let mock_rollup = AvailDemoRollup {};
     mock_rollup
         .create_new_rollup(
             rt_genesis_paths,
