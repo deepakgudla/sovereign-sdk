@@ -69,9 +69,9 @@ impl RollupBlueprint for AvailDemoRollup {
         DaProvider::new(
             // rollup_config.da.clone(),
             DaServiceConfig{
-                light_client_url:String::from("sgs"),
-                node_client_url:String::from("sfgs"),
-                seed:String::from("ss"),
+                light_client_url:String::from(const_rollup_config.LIGHT_CLIENT_URL), // !correct ?
+                node_client_url:String::from(const_rollup_config.NODE_CLIENT_URL),  // !correct ?
+                seed:String::from(const_rollup_config.SEED),
                 polling_interval:DEFAULT_POLLING_INTERVAL,
                 polling_timeout:DEFAULT_POLLING_TIMEOUT,
                 app_id:1,
@@ -85,7 +85,7 @@ impl RollupBlueprint for AvailDemoRollup {
     // ) -> Self::DaService {
     //     DaProvider::new(
     //         rollup_config.da.clone(),
-    //         light_client_url = confi
+    //         light_client_url = config
             
     //     )
     //         .await

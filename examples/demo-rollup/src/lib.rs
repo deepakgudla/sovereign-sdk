@@ -28,6 +28,14 @@ pub const ROLLUP_BATCH_NAMESPACE: Namespace = Namespace::const_v0(ROLLUP_BATCH_N
 /// The rollup stores the zk proofs in the namespace b"sov-test-p" on Celestia.
 pub const ROLLUP_PROOF_NAMESPACE: Namespace = Namespace::const_v0(ROLLUP_PROOF_NAMESPACE_RAW);
 
+pub const LIGHT_CLIENT_URL: &str = "http://127.0.0.1:8000";
+
+pub const NODE_CLIENT_URL: &str = "http://127.0.0.1:9944";
+
+pub const SEED: &str = "bottom drive obey lake curtain smoke basket hold race lonely fit walk//Alice";
+
+
+
 /// Default initialization of logging
 pub fn initialize_logging() {
     tracing_subscriber::registry()

@@ -2,7 +2,7 @@
 # The JWT used to authenticate with the avail light client. Instructions for generating this token can be found in the README
 avail_rpc_auth_token = "MY.SECRET.TOKEN"
 # The address of the *trusted* avail light client to interact with
-avail_rpc_address = "http://127.0.0.1:8000"  #change ?
+avail_rpc_address = "http://127.0.0.1:8000"  #change ? - light-client-addressl
 # The largest response the rollup will accept from the avail node. Defaults to 100 MB
 max_avail_response_body_size = 104_857_600
 # The maximum time to wait for a response to an RPC query against avail node. Defaults to 60 seconds.

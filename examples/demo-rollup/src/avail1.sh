@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-RPC_ENDPOINT="http://127.0.0.1:12345"  #change this it to avail rpc endpoint
+RPC_ENDPOINT="http://127.0.0.1:8000"  #change this it to avail rpc endpoint
 PRIVATE_KEY="../test-data/keys/token_deployer_private_key.json"
 SOV_CLI="../../target/debug/sov-cli"
 
