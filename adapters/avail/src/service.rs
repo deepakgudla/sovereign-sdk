@@ -39,9 +39,9 @@ pub struct DaServiceConfig {
 pub const DEFAULT_POLLING_TIMEOUT: Duration = Duration::from_secs(60);
 pub const DEFAULT_POLLING_INTERVAL: Duration = Duration::from_secs(1);
 
-pub const LIGHT_CLIENT_URL: &str = "http://127.0.0.1:8000";
+pub const LIGHT_CLIENT_URL: &str = "ws://127.0.0.1:8000";
 
-pub const NODE_CLIENT_URL: &str = "http://127.0.0.1:9944";
+pub const NODE_CLIENT_URL: &str = "ws://127.0.0.1:9944";
 
 pub const SEED: &str = "bottom drive obey lake curtain smoke basket hold race lonely fit walk//Alice";
 
