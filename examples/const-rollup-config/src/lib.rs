@@ -10,7 +10,7 @@ pub const ROLLUP_PROOF_NAMESPACE_RAW: [u8; 10] = [115, 111, 118, 45, 116, 101, 1
 pub const LIGHT_CLIENT_URL: &str = "http://127.0.0.1:8000";
 
 /// node client url 
-pub const NODE_CLIENT_URL: &str = "http://127.0.0.1:9944";
+pub const NODE_CLIENT_URL: &str = "ws://127.0.0.1:9944";
 
 /// default polling interval
 pub const DEFAULT_POLLING_INTERVAL: [u64; 1] = [30];

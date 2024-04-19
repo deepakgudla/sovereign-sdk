@@ -3,6 +3,7 @@ use sov_rollup_interface::da::DaSpec;
 use crate::verifier::ChainValidityCondition;
 
 pub mod address;
+pub use address::AvailAddress;
 pub mod block;
 mod hash;
 pub mod header;

@@ -1,6 +1,6 @@
+
 #[cfg(feature = "native")]
 mod avail;
-#[cfg(feature = "native")]
 pub mod service;
 pub mod spec;
 pub mod verifier;
@@ -9,3 +9,4 @@ pub mod verifier;
 #[cfg(feature = "native")]
 pub use service::{DaServiceConfig, DaProvider};
 pub use avail_subxt::build_client;
+pub use verifier::Verifier;

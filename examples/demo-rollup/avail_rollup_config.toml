@@ -8,9 +8,9 @@ max_avail_response_body_size = 104_857_600
 # The maximum time to wait for a response to an RPC query against avail node. Defaults to 60 seconds.
 avail_rpc_timeout_seconds = 60
 # light client url
-light_client_url = "ws://127.0.0.1:8000"
+light_client_url = "http://127.0.0.1:8000"
 # node client url
-node_client_url = ""
+node_client_url = "ws://127.0.0.1:9944"
 #seed
 seed = ""
 #app_id
@@ -24,7 +24,7 @@ path = "demo_data"
 # We define the rollup's genesis to occur at block number `start_height`. The rollup will ignore
 # any blocks before this height
 [runner]
-start_height = 3  #change the start height...
+start_height = 10  #change the start height...
 
 [runner.rpc_config]
 # the host and port to bind the rpc server for

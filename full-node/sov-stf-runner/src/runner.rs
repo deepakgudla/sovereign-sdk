@@ -276,7 +276,10 @@ where
                             tokio::time::sleep(tokio::time::Duration::from_millis(100)).await
                         }
                         // TODO(https://github.com/Sovereign-Labs/sovereign-sdk/issues/1185): Add handling for DA submission errors.
-                        Err(e) => panic!("{:?}", e),
+                        Err(e) => {
+                            println!("its not submitting, do whatever you want!!!!{:?}", e);
+                            break
+                        },
                     }
                 }
             }

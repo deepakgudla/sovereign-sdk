@@ -64,7 +64,7 @@ impl GenesisPaths {
 pub fn get_genesis_config<C: Context, Da: DaSpec>(
     genesis_paths: &GenesisPaths,
 ) -> Result<<Runtime<C, Da> as RuntimeTrait<C, Da>>::GenesisConfig, anyhow::Error> {
-    let genesis_config =
+    let genesis_config: GenesisConfig<C, Da> =
         create_genesis_config(genesis_paths).context("Unable to read genesis configuration")?;
     validate_config(genesis_config)
 }
@@ -97,7 +97,6 @@ fn create_genesis_config<C: Context, Da: DaSpec>(
     genesis_paths: &GenesisPaths,
 ) -> anyhow::Result<<Runtime<C, Da> as RuntimeTrait<C, Da>>::GenesisConfig> {
     let bank_config: BankConfig<C> = read_json_file(&genesis_paths.bank_genesis_path)?;
-
     let sequencer_registry_config: SequencerConfig<C, Da> =
         read_json_file(&genesis_paths.sequencer_genesis_path)?;
 

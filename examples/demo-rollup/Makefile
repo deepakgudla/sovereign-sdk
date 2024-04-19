@@ -8,7 +8,7 @@ SOV_CLI_REL_PATH := $(PROJECT_ROOT)/target/debug/sov-cli
 # at height 3 the credits will already belong to the keys
 START_HEIGHT := 3
 KEY_NAME := bridge-0
-RPC_PORT := 26658
+RPC_PORT := 9944
 
 # get the jwt token
 get_auth = $(shell cat $(CREDENTIALS_DIR)/$(KEY_NAME).jwt)
@@ -25,37 +25,37 @@ compose_logs := $(docker_compose) logs -f
 # we need a bridge and validator so naive check is to have at least 2 services
 compose_is_running = test 2 -le "$(shell $(docker_compose) ps --filter status=running --format json | jq 'length')"
 
-# start the celestia network and generate a new config
-start: check-docker start-network update-config
-	@$(compose_logs)
+# start the avail network and generate a new config
+# start: check-docker start-network update-config
+# 	@$(compose_logs)
 
-# start the celestia network or attach to existing
-start-network: check-docker
-	@echo "Starting local celestia network setup"
-	@if $(compose_is_running); then $(compose_logs); else $(compose_up); fi
+# start the avail network or attach to existing
+# start-network: check-docker
+# 	@echo "Starting local avail network setup"
+# 	@if $(compose_is_running); then $(compose_logs); else $(compose_up); fi
 
-# stop the celestia network
-stop: check-docker
-	@echo "Stopping local celestia network setup"
-	@$(compose_down)
+# stop the avail network
+# stop: check-docker
+# 	@echo "Stopping local avail network setup"
+# 	@$(compose_down)
 
-# clean up rollup data and stop the celestia network
-clean: stop clean-celestia-rollup-db
+# clean up rollup data and stop the avail network
+clean: stop clean-avail-rollup-db
 
-# listen to celestia network logs
+# listen to avail network logs
 compose-logs: check-docker
-	@echo "Showing celestia logs"
+	@echo "Showing avail logs"
 	@$(compose_logs)
 
 # check if docker is installed
 check-docker:
 	@command -v docker > /dev/null 2>&1 || { echo "Docker is not installed"; exit 1; }
 
-# check if celestia network is running
+# check if avail network is running
 check-compose-running: check-docker
 	@$(compose_is_running)
 
-# wait for the celestia network to perform setup and coins transfers
+# wait for the avail network to perform setup and coins transfers
 wait-compose-ready:
 	@echo "Waiting for services to finish setup"
 	@$(compose_logs) | awk '/Provisioning finished./ {print;exit}' # exit when encounter this log entry
@@ -63,13 +63,13 @@ wait-compose-ready:
 # update the rollup configuration with local network params
 update-config: wait-compose-ready
 ifeq ($(shell uname -s),Darwin)
-	@sed -i '' 's/^\(celestia_rpc_auth_token = \)"[^"]*"/\1"$(get_auth)"/' celestia_rollup_config.toml
-	@sed -i '' 's#^\(celestia_rpc_address = \)"[^"]*"#\1"http://127.0.0.1:$(RPC_PORT)"#' celestia_rollup_config.toml
-	@sed -i '' 's#^\(start_height = \)[0-9]*#\1$(START_HEIGHT)#' celestia_rollup_config.toml
+	@sed -i '' 's/^\(avail_rpc_auth_token = \)"[^"]*"/\1"$(get_auth)"/' avail_rollup_config.toml
+	@sed -i '' 's#^\(avail_rpc_address = \)"[^"]*"#\1"http://127.0.0.1:$(RPC_PORT)"#' avail_rollup_config.toml
+	@sed -i '' 's#^\(start_height = \)[0-9]*#\1$(START_HEIGHT)#' avail_rollup_config.toml
 else
-	@sed -i 's/^\(celestia_rpc_auth_token = \)"[^"]*"/\1"$(get_auth)"/' celestia_rollup_config.toml
-	@sed -i 's#^\(celestia_rpc_address = \)"[^"]*"#\1"http://127.0.0.1:$(RPC_PORT)"#' celestia_rollup_config.toml
-	@sed -i 's#^\(start_height = \)[0-9]*#\1$(START_HEIGHT)#' celestia_rollup_config.toml
+	@sed -i 's/^\(avail_rpc_auth_token = \)"[^"]*"/\1"$(get_auth)"/' avail_rollup_config.toml
+	@sed -i 's#^\(avail_rpc_address = \)"[^"]*"#\1"http://127.0.0.1:$(RPC_PORT)"#' avail_rollup_config.toml
+	@sed -i 's#^\(start_height = \)[0-9]*#\1$(START_HEIGHT)#' avail_rollup_config.toml
 endif
 
 build-sov-cli:
@@ -90,8 +90,8 @@ test-create-token: set-rpc-url test-generate-create-token-tx import-keys
 remove-insecure-keys: build-sov-cli
 	$(SOV_CLI_REL_PATH) keys remove by-address sov1l6n2cku82yfqld30lanm2nfw43n2auc8clw7r5u5m6s7p8jrm4zqrr8r94
 
-clean-celestia-rollup-db:
-	$(eval path := ./$(shell awk -F'=' '/^path/ {print $$2}' celestia_rollup_config.toml | tr -d '[:space:]"\n'))
+clean-avail-rollup-db:
+	$(eval path := ./$(shell awk -F'=' '/^path/ {print $$2}' avail_rollup_config.toml | tr -d '[:space:]"\n'))
 	@if [ -z "${path}" ] || [ "${path}" = "./" ]; then \
 		echo "Path is empty or too short, not safe to remove"; \
 		exit 1; \

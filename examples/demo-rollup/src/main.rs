@@ -1,5 +1,6 @@
 use anyhow::Context as _;
 use clap::Parser;
+use serde_json::Value;
 use demo_stf::genesis_config::GenesisPaths;
 use sov_demo_rollup::{initialize_logging, CelestiaDemoRollup, MockDemoRollup, AvailDemoRollup};
 
@@ -26,7 +27,7 @@ struct Args {
     da_layer: SupportedDaLayer,
 
     /// The path to the rollup config.
-    #[arg(long, default_value = "avail_rollup_config.toml")]
+    #[arg(long, default_value = "avail_rollup_config.toml")] //avail_rollup_config.toml
     rollup_config_path: String,
 }
 

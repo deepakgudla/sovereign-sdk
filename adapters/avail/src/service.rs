@@ -39,9 +39,9 @@ pub struct DaServiceConfig {
 pub const DEFAULT_POLLING_TIMEOUT: Duration = Duration::from_secs(60);
 pub const DEFAULT_POLLING_INTERVAL: Duration = Duration::from_secs(1);
 
-pub const LIGHT_CLIENT_URL: &str = "ws://127.0.0.1:8000";
+// pub const LIGHT_CLIENT_URL: &str = "ws://127.0.0.1:8000";
 
-pub const NODE_CLIENT_URL: &str = "ws://127.0.0.1:9944";
+// pub const NODE_CLIENT_URL: &str = "ws://127.0.0.1:9944";
 
 pub const SEED: &str = "bottom drive obey lake curtain smoke basket hold race lonely fit walk//Alice";
 
@@ -71,11 +71,14 @@ impl DaProvider {
     pub async fn new(config: DaServiceConfig) -> Self {
         let pair = Pair::from_string_with_seed(&config.seed, None).unwrap();
         let signer = PairSigner::<AvailConfig, Pair>::new(pair.0.clone());
+        println!("The value of light client: {}", config.light_client_url);
 
         let node_client = avail_subxt::build_client(config.node_client_url.to_string(), false)
             .await
             .unwrap();
         let light_client_url = config.light_client_url;
+      
+       
 
         DaProvider {
             node_client,
@@ -302,7 +305,6 @@ impl DaService for DaProvider {
             .submit_data(BoundedVec(blob.to_vec()));
 
         let extrinsic_params = AvailExtrinsicParams::new_with_app_id(self.app_id.into());
-
         let h = self
             .node_client
             .tx()

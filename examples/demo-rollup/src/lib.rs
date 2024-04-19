@@ -29,7 +29,7 @@ pub const ROLLUP_BATCH_NAMESPACE: Namespace = Namespace::const_v0(ROLLUP_BATCH_N
 pub const ROLLUP_PROOF_NAMESPACE: Namespace = Namespace::const_v0(ROLLUP_PROOF_NAMESPACE_RAW);
 
 /// light client url
-pub const LIGHT_CLIENT_URL: &str = "ws://127.0.0.1:8000";
+pub const LIGHT_CLIENT_URL: &str = "http://127.0.0.1:8000";
 
 /// node client url
 pub const NODE_CLIENT_URL: &str = "ws://127.0.0.1:9944";
