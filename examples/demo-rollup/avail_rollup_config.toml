@@ -12,7 +12,7 @@ light_client_url = "http://127.0.0.1:8000"
 # node client url
 node_client_url = "ws://127.0.0.1:9944"
 #seed
-seed = ""
+seed = "bottom drive obey lake curtain smoke basket hold race lonely fit walk//Alice"
 #app_id
 app_id = 1
 
@@ -24,12 +24,12 @@ path = "demo_data"
 # We define the rollup's genesis to occur at block number `start_height`. The rollup will ignore
 # any blocks before this height
 [runner]
-start_height = 10  #change the start height...
+start_height = 3 #change the start height...
 
 [runner.rpc_config]
 # the host and port to bind the rpc server for
 bind_host = "127.0.0.1"
 bind_port = 12345
 
-[prover_service]
+[prover_service] 
 aggregated_proof_block_jump = 1

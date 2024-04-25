@@ -1,6 +1,6 @@
 {
   "seq_rollup_address": "sov1l6n2cku82yfqld30lanm2nfw43n2auc8clw7r5u5m6s7p8jrm4zqrr8r94",
-  "seq_da_address": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
+  "seq_da_address": [13, 5, 25, 31, 28, 30, 5, 27, 20, 6, 29, 10, 14, 29, 20, 12, 22, 13, 19, 1, 0, 11, 9, 15, 23, 13, 14, 1, 9, 27, 9, 14],
   "coins_to_lock": {
     "amount": 50,
     "token_address": "sov1zsnx7n2wjvtkr0ttscfgt06pjca3v2e6stxeu49qwynavmk7a8xqlxkkjp"
