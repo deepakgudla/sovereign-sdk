@@ -256,9 +256,10 @@ where
             // Pre dispatch hook
             // TODO set the sequencer pubkey
             let hook = RuntimeTxHook {
-                height: 1,
+                height: 1,  //changed height......
                 sequencer: tx.pub_key().clone(),
             };
+            println!("sequencerrrrrrrrrrrr={:?}", hook.sequencer);
             let ctx = match self
                 .runtime
                 .pre_dispatch_tx_hook(&tx, &mut batch_workspace, &hook)
@@ -272,7 +273,7 @@ where
                     let receipt = TransactionReceipt {
                         tx_hash: raw_tx_hash,
                         body_to_save: None,
-                        events: batch_workspace.take_events(),
+                        events: batch_workspace.take_events(), 
                         receipt: TxEffect::Reverted,
                         gas_used,
                     };

@@ -197,7 +197,7 @@ where
             let mut blobs = self.da_service.extract_relevant_blobs(&filtered_block);
 
             info!(
-                "Extracted {} relevant blobs at height {}: {:?}",
+                "Extracted {} relevant blobs at height {}: {:?}", //check-3
                 blobs.len(),
                 height,
                 blobs
@@ -277,7 +277,7 @@ where
                         }
                         // TODO(https://github.com/Sovereign-Labs/sovereign-sdk/issues/1185): Add handling for DA submission errors.
                         Err(e) => {
-                            println!("its not submitting, do whatever you want!!!!{:?}", e);
+                            // println!("its not submitting!!!!{:?}", e);
                             break
                         },
                     }

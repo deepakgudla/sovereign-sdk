@@ -209,6 +209,7 @@ impl DaService for DaProvider {
         let node_client = self.node_client.clone();
         let confidence_url = self.confidence_url(height);
         let appdata_url = self.appdata_url(height);
+        println!("hello.....{:?}", height);
 
         wait_for_confidence(&confidence_url, self.polling_timeout, self.polling_interval).await?;
         let appdata = wait_for_appdata(
@@ -236,6 +237,7 @@ impl DaService for DaProvider {
             .iter()
             .map(AvailBlobTransaction::new)
             .collect();
+        println!("transactions.....: {:?}", transactions);
 
         let transactions = transactions?;
         Ok(AvailBlock {

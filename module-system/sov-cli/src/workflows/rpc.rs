@@ -112,7 +112,10 @@ impl<C: sov_modules_api::Context + Serialize + DeserializeOwned + Send + Sync> R
             ))?
             .clone();
         let client = HttpClientBuilder::default().build(rpc_url)?;
+        println!("client is client. client: {:?}", client);
         let account = self.resolve_account(wallet_state)?;
+        println!("account is account. account........: {:?}", account);
+
 
         // Finally, run the workflow
         match self {

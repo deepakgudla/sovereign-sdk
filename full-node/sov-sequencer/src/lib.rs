@@ -36,7 +36,7 @@ impl<B: BatchBuilder + Send + Sync, T: DaService + Send + Sync> Sequencer<B, T> 
         // But potentially it can create blobs that are sent out of order.
         // It can be improved with atomics,
         // so a new batch is only created after previous was submitted.
-        tracing::info!("Submit batch request has been received!");
+        tracing::info!("Submit batch request has been received!");    //check-1
         let blob = {
             let mut batch_builder = self
                 .batch_builder
